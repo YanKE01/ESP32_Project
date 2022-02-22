@@ -17,7 +17,8 @@
     "mqtt_client.h": "c",
     "esp_err.h": "c",
     "event_groups.h": "c",
-    "drv_bh1750.h": "c"
+    "drv_bh1750.h": "c",
+    "esp_spi_flash.h": "c"
   },
   "RTT_Studio.Build.Parallel_Jobs": "12",
   "idf.adapterTargetName": "esp32s2",

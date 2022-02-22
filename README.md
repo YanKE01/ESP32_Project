@@ -40,9 +40,16 @@ template-app：存放ESP32项目工程
 
 
 
+## 未验证功能
+
+1. WIFI-----STA-------TCP Client
+2. WIFI-----STA-------TCP Server
+
+
+
 ## 开源项目支持
 
 https://github.com/0x1abin/MultiButton
 
-
+https://blog.csdn.net/cnicfhnui/category_10350929.html
 
