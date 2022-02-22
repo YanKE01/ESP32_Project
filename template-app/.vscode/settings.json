@@ -1,0 +1,25 @@
+{
+  "C_Cpp.intelliSenseEngine": "Tag Parser",
+  "files.associations": {
+    "drv_i2c.h": "c",
+    "functional": "c",
+    "drv_sht20.h": "c",
+    "gpio.h": "c",
+    "i2c.h": "c",
+    "drv_wifi.h": "c",
+    "drv_adxl345.h": "c",
+    "drv_task.h": "c",
+    "drv_multibutton.h": "c",
+    "drv_mqtt.h": "c",
+    "array": "c",
+    "string": "c",
+    "string_view": "c",
+    "mqtt_client.h": "c",
+    "esp_err.h": "c",
+    "event_groups.h": "c",
+    "drv_bh1750.h": "c"
+  },
+  "RTT_Studio.Build.Parallel_Jobs": "12",
+  "idf.adapterTargetName": "esp32s2",
+  "idf.portWin": "COM12"
+}
