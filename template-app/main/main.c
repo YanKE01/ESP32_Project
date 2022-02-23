@@ -22,6 +22,11 @@
 /*------SYSTEM TAG-----*/
 char *TAG = "TAG";
 
+/*------USER CODE-----*/
+void LedFlashTask(void *pvParameters);
+
+
+
 void app_main(void)
 {
    /*-----------------------------NVS初始化-------------------------------------*/
@@ -36,9 +41,22 @@ void app_main(void)
    /*-----------------------------用户代码起始-------------------------------------*/
    Bh1750_Init(I2C_NUM_0, GPIO_NUM_5, GPIO_NUM_4);
 
-   while (1)
+   gpio_pad_select_gpio(GPIO_NUM_12);
+   gpio_set_direction(GPIO_NUM_12, GPIO_MODE_OUTPUT);
+
+   xTaskCreate(&LedFlashTask,"LED",1024*2,NULL,1,NULL);
+}
+
+
+
+void LedFlashTask(void *pvParameters)
+{
+   uint8_t flag=0;
+
+   while(1)
    {
-      ESP_LOGI(TAG,"bh1750:%.2f [Lux]\n",BH1750_ReadLightIntensity(I2C_NUM_0));
+      flag = !flag;
+      gpio_set_level(GPIO_NUM_12,flag);
       vTaskDelay(1000/portTICK_PERIOD_MS);
    }
 }
