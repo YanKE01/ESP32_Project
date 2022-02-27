@@ -1,4 +1,4 @@
-idf_component_register(SRCS "drv_mqtt.c" "drv_wifi.c" "drv_i2c.c" "drv_comm.c" 
+idf_component_register(SRCS "drv_uart.c" "drv_mqtt.c" "drv_wifi.c" "drv_i2c.c" "drv_comm.c" 
                     "D:/IDE/ESP32_IDF/Main/components/mqtt/esp-mqtt/mqtt_client.c" 
                     "D:/IDE/ESP32_IDF/Main/components/mqtt/esp-mqtt/lib/mqtt_msg.c" 
                     "D:/IDE/ESP32_IDF/Main/components/mqtt/esp-mqtt/lib/mqtt_outbox.c" 

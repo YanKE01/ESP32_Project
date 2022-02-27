@@ -1,5 +1,6 @@
-#ifndef _DRV_TASK_H
-#define _DRV_TASK_H
+#ifndef _DRV_UART_H
+#define _DRV_UART_H
+
 
 #include "driver/uart.h"
 #include "driver/gpio.h"
@@ -8,7 +9,7 @@
 #include "freertos/task.h"
 #include "string.h"
 
+void Uart1_Init();
 
-void Task_Startup();
 
 #endif

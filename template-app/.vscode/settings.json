@@ -18,9 +18,13 @@
     "esp_err.h": "c",
     "event_groups.h": "c",
     "drv_bh1750.h": "c",
-    "esp_spi_flash.h": "c"
+    "esp_spi_flash.h": "c",
+    "drv_uart.h": "c",
+    "uart.h": "c",
+    "drv_led.h": "c",
+    "drv_gpio.h": "c"
   },
   "RTT_Studio.Build.Parallel_Jobs": "12",
   "idf.adapterTargetName": "esp32s2",
-  "idf.portWin": "COM12"
+  "idf.portWin": "COM5"
 }

@@ -13,19 +13,23 @@
 #include "esp_spi_flash.h"
 #include "nvs_flash.h"
 #include "esp_log.h"
+#include "freertos/event_groups.h"
 
-/*------USER INCLUDE-----*/
+/*------USER INCLUDE BEGIN-----*/
 #include "drv_sht20.h"
 #include "driver/gpio.h"
 #include "driver/i2c.h"
 #include "drv_bh1750.h"
+#include "driver/uart.h"
+#include "drv_uart.h"
+#include "string.h"
+#include "drv_gpio.h"
+#include "drv_task.h"
 /*------SYSTEM TAG-----*/
 char *TAG = "TAG";
 
 /*------USER CODE-----*/
 void LedFlashTask(void *pvParameters);
-
-
 
 void app_main(void)
 {
@@ -39,24 +43,6 @@ void app_main(void)
    ESP_ERROR_CHECK(ret);
 
    /*-----------------------------用户代码起始-------------------------------------*/
-   Bh1750_Init(I2C_NUM_0, GPIO_NUM_5, GPIO_NUM_4);
-
-   gpio_pad_select_gpio(GPIO_NUM_12);
-   gpio_set_direction(GPIO_NUM_12, GPIO_MODE_OUTPUT);
-
-   xTaskCreate(&LedFlashTask,"LED",1024*2,NULL,1,NULL);
-}
-
-
-
-void LedFlashTask(void *pvParameters)
-{
-   uint8_t flag=0;
-
-   while(1)
-   {
-      flag = !flag;
-      gpio_set_level(GPIO_NUM_12,flag);
-      vTaskDelay(1000/portTICK_PERIOD_MS);
-   }
+   GpioInit(GPIO_NUM_12,GPIO_MODE_OUTPUT);
+   Task_Startup();
 }

@@ -2,44 +2,54 @@
 #include "drv_task.h"
 
 const char *TASK_TAG = "TASK";
+SemaphoreHandle_t testSem = NULL; //二值信号量
+
 /**
- * @brief Wifi重连Task，即使Wifi Handler内有重连机制
- *        但是一旦WIFI创建完成后，我们还是需要一直检测WIFI状态
- * 
+ * @brief 呼吸灯检测
+ *
+ * @param pvParameters
  */
-void Wifi_Reconncet_Task()
+void LedTask_Entry(void *pvParameters)
 {
-    EventBits_t bits;
-
+    uint8_t status = 0;
+    uint8_t count = 0;
     while (1)
     {
-        bits = xEventGroupWaitBits(s_wifi_event_group,
-                                   WIFI_CONNECTED_BIT | WIFI_FAIL_BIT,
-                                   pdFALSE,
-                                   pdFALSE,
-                                   100 / portTICK_PERIOD_MS);
-
-        if (bits & WIFI_FAIL_BIT)
+        count++;
+        status = !status;
+        gpio_set_level(GPIO_NUM_12, status);
+        if (count >= 10)
         {
-            ESP_LOGI(TASK_TAG, "Retry Connect Task");
-            esp_wifi_connect();
+            count = 0;
+            xSemaphoreGive(testSem);
         }
-
-        vTaskDelay(5000 / portTICK_PERIOD_MS);
-    }
-}
-
-void Test_Task()
-{
-    while (1)
-    {
-        ESP_LOGI(TASK_TAG, "Test Task Running\n");
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
 
+/**
+ * @brief 信号量测试线程
+ *
+ * @param pvParameters
+ */
+void SemTest_Entry(void *pvParameters)
+{
+    while (1)
+    {
+        if (xSemaphoreTake(testSem, portMAX_DELAY) == pdTRUE)
+        {
+            ESP_LOGI(TASK_TAG, "Take Sem\n");
+        }
+    }
+}
+
+/**
+ * @brief 线程启动函数
+ *
+ */
 void Task_Startup()
 {
-    xTaskCreate(Test_Task, "Test", 2048, NULL, 1, NULL);
-    xTaskCreate(Wifi_Reconncet_Task, "Reconnect", 2048, NULL, 5, NULL);
+    testSem = xSemaphoreCreateBinary(); //创建二值信号量
+    xTaskCreate(&LedTask_Entry, "LED", 1024*2, NULL, 1, NULL);
+    xTaskCreate(&SemTest_Entry, "SEM", 1024*2, NULL, 2, NULL);
 }
