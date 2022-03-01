@@ -25,6 +25,7 @@
 #include "string.h"
 #include "drv_gpio.h"
 #include "drv_task.h"
+#include "tools.h"
 /*------SYSTEM TAG-----*/
 char *TAG = "TAG";
 
@@ -43,7 +44,15 @@ void app_main(void)
    ESP_ERROR_CHECK(ret);
 
    /*-----------------------------用户代码起始-------------------------------------*/
-   GpioInit(GPIO_NUM_12,GPIO_MODE_OUTPUT);
-   Wifi_Init();
-   Task_Startup();
+   // GpioInit(GPIO_NUM_12,GPIO_MODE_OUTPUT);
+   // Wifi_Init();
+   // Task_Startup();
+   // Sht20_Init(I2C_NUM_0,GPIO_NUM_16,GPIO_NUM_17);
+
+   // while(1)
+   // {
+   //       ESP_LOGI(TAG,"T:%.2f H:%.2F",Sht20_GetTemper(I2C_NUM_0),Sht20_GetHumidity(I2C_NUM_0));
+   //       vTaskDelay(1000/portTICK_PERIOD_MS);
+   // }
+
 }

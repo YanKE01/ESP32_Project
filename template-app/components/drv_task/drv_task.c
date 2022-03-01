@@ -45,13 +45,56 @@ void SemTest_Entry(void *pvParameters)
 }
 
 /**
+ * @brief TCP发送线程
+ *
+ * @param pvParameters
+ */
+void TcpSendTask_Entry(void *pvParameters)
+{
+    EventBits_t bits;
+    while (1)
+    {
+        //无需清除标志位
+        bits = xEventGroupWaitBits(s_wifi_event_group,
+                                   WIFI_CONNECTED_BIT,
+                                   pdFALSE,
+                                   pdFALSE,
+                                   1);
+        
+        if ((bits & WIFI_CONNECTED_BIT) && tcpRestart == false)
+        {
+            //只有在WIFI连接状态下，且Tcp无需重启状态下
+            ESP_LOGI(TASK_TAG, "Send Success");
+            TcpSendMessage("hello world\n");
+        }
+        else
+        {
+            ESP_LOGI(TASK_TAG, "Wait Wifi And Tcp");
+        }
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
+/**
+ * @brief SHT20采集线程
+ * 
+ * @param pvParameters 
+ */
+void Sht20RequireTask_Entry(void *pvParameters)
+{
+    
+}
+
+/**
  * @brief 线程启动函数
  *
  */
 void Task_Startup()
 {
     testSem = xSemaphoreCreateBinary(); //创建二值信号量
+
     xTaskCreate(&LedTask_Entry, "LED", 1024 * 2, NULL, 1, NULL);
     xTaskCreate(&SemTest_Entry, "SEM", 1024 * 2, NULL, 2, NULL);
-    xTaskCreate(&TcpCreateTask_Entry, "Tcp Create", 1024 * 4, NULL, 5, NULL); // TCP连接任务
+    // xTaskCreate(&TcpSendTask_Entry, "Send", 1024 * 2, NULL, 3, NULL);
+    // xTaskCreate(&TcpCreateTask_Entry, "Tcp Create", 1024 * 4, NULL, 5, NULL); // TCP连接任务
 }

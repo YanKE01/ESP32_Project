@@ -13,6 +13,9 @@
 #include "esp_log.h"
 #include "drv_wifi.h"
 
+extern bool tcpRestart;
+
 void TcpCreateTask_Entry(void *pvParameters);
+void TcpSendMessage(char *message);
 
 #endif

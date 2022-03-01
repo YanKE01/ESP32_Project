@@ -125,9 +125,20 @@ void TcpCreateTask_Entry(void *pvParameters)
                 else
                 {
                     ESP_LOGI(TCP_TAG, "restart socket create Success");
-                    tcpRestart=false;//取消重启标志
+                    tcpRestart = false; //取消重启标志
                 }
             }
         }
     }
+}
+
+/**
+ * @brief TCP发送消息
+ *
+ * @param message
+ * @param len
+ */
+void TcpSendMessage(char *message)
+{
+    send(connect_socket, message, strlen(message), 0); //发送数据
 }

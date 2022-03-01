@@ -7,6 +7,7 @@
 #include "esp_log.h"
 #include "freertos/event_groups.h"
 #include "esp_system.h"
+#include "drv_sta_client.h"
 
 #define WIFI_CONNECTED_BIT BIT0
 #define WIFI_FAIL_BIT BIT1

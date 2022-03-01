@@ -25,17 +25,11 @@ void Wifi_Event_Handler(void *arg, esp_event_base_t event_base, int32_t event_id
     }
     else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED)
     {
-        if (1)
-        {
-            esp_wifi_connect();
-            ESP_LOGI(WIFI_TAG, "Retry Connecting");
-            vTaskDelay(1000 / portTICK_PERIOD_MS);
-        }
-        else
-        {
-            //重连失败
-            xEventGroupSetBits(s_wifi_event_group, WIFI_FAIL_BIT);
-        }
+        esp_wifi_connect();
+        ESP_LOGI(WIFI_TAG, "Retry Connecting");
+        xEventGroupSetBits(s_wifi_event_group, WIFI_FAIL_BIT);
+        tcpRestart = true; //需要重连TCP
+        vTaskDelay(5000 / portTICK_PERIOD_MS);
     }
     else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP)
     {

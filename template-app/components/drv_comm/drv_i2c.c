@@ -54,7 +54,7 @@ esp_err_t I2C_WriteData(int i2c_num, uint8_t slaveAddr, uint8_t regAddr, uint8_t
         i2c_master_write(cmd, pData, len, ACK_CHECK_ENABLE);
     }
     i2c_master_stop(cmd);
-    result = i2c_master_cmd_begin(i2c_num, cmd, 1000 / portTICK_PERIOD_MS);
+    result = i2c_master_cmd_begin(i2c_num, cmd, 1 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
     return result;
 }
@@ -85,7 +85,7 @@ esp_err_t I2C_ReadData(int i2c_num, uint8_t slaveAddr, uint8_t regAddr, uint8_t 
         i2c_master_read(cmd, pData, len, ACK);
     }
     i2c_master_stop(cmd);
-    result = i2c_master_cmd_begin(i2c_num, cmd, 1000 / portTICK_PERIOD_MS);
+    result = i2c_master_cmd_begin(i2c_num, cmd, 1 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
 
     return result;

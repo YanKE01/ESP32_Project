@@ -17,7 +17,7 @@
 #define SHT20_SOFT_RESET 0xFE
 
 void Sht20_Init(int i2c_num, int sda_io, int scl_io);
-float Sht20_GetTemper();
-float Sht20_GetHumidity();
+float Sht20_GetTemper(int i2c_num);
+float Sht20_GetHumidity(int i2c_num);
 
 #endif
