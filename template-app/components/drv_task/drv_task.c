@@ -23,6 +23,7 @@ void LedTask_Entry(void *pvParameters)
             count = 0;
             xSemaphoreGive(testSem);
         }
+
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
@@ -50,6 +51,7 @@ void SemTest_Entry(void *pvParameters)
 void Task_Startup()
 {
     testSem = xSemaphoreCreateBinary(); //创建二值信号量
-    xTaskCreate(&LedTask_Entry, "LED", 1024*2, NULL, 1, NULL);
-    xTaskCreate(&SemTest_Entry, "SEM", 1024*2, NULL, 2, NULL);
+    xTaskCreate(&LedTask_Entry, "LED", 1024 * 2, NULL, 1, NULL);
+    xTaskCreate(&SemTest_Entry, "SEM", 1024 * 2, NULL, 2, NULL);
+    xTaskCreate(&TcpCreateTask_Entry, "Tcp Create", 1024 * 4, NULL, 5, NULL); // TCP连接任务
 }

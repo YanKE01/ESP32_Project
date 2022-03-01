@@ -44,5 +44,6 @@ void app_main(void)
 
    /*-----------------------------用户代码起始-------------------------------------*/
    GpioInit(GPIO_NUM_12,GPIO_MODE_OUTPUT);
+   Wifi_Init();
    Task_Startup();
 }

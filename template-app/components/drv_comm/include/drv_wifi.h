@@ -8,13 +8,12 @@
 #include "freertos/event_groups.h"
 #include "esp_system.h"
 
-
 #define WIFI_CONNECTED_BIT BIT0
 #define WIFI_FAIL_BIT BIT1
 
-extern EventGroupHandle_t s_wifi_event_group; //WIFI事件组
+extern int MAX_Reconnect;
+extern EventGroupHandle_t s_wifi_event_group; // WIFI事件组
 
 void Wifi_Init();
-
 
 #endif
