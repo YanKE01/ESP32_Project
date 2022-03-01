@@ -23,7 +23,10 @@
     "uart.h": "c",
     "drv_led.h": "c",
     "drv_gpio.h": "c",
-    "drv_simiic.h": "c"
+    "drv_simiic.h": "c",
+    "drv_sta_client.h": "c",
+    "*.ipp": "c",
+    "*.inc": "c"
   },
   "RTT_Studio.Build.Parallel_Jobs": "12",
   "idf.adapterTargetName": "esp32s2",
