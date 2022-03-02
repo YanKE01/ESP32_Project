@@ -1,7 +1,5 @@
 # ESP32-S2项目
 
-
-
 ESP32-S2模板项目工程，项目内所有驱动均已测试，RTOS需自行实现
 
 相关CmakeLists下的模块路径务必<font color="red">**自行修改**</font>，Vscode工程路径在 .vscode内自行修改
@@ -51,8 +49,7 @@ template-app：存放ESP32项目工程
 
 ## 未验证功能
 
-1. WIFI-----STA-------TCP Client
-2. WIFI-----STA-------TCP Server
+1. WIFI-----STA-------TCP Server
 
 
 
@@ -60,6 +57,7 @@ template-app：存放ESP32项目工程
 
 1. 修正WIFI驱动缺陷
 1. 项目添加C++支持
+1. 添加WIFI 静态IP支持
 
 ## 开源项目支持
 

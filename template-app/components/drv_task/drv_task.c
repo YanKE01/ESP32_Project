@@ -95,6 +95,6 @@ void Task_Startup()
 
     xTaskCreate(&LedTask_Entry, "LED", 1024 * 2, NULL, 1, NULL);
     xTaskCreate(&SemTest_Entry, "SEM", 1024 * 2, NULL, 2, NULL);
-    // xTaskCreate(&TcpSendTask_Entry, "Send", 1024 * 2, NULL, 3, NULL);
-    // xTaskCreate(&TcpCreateTask_Entry, "Tcp Create", 1024 * 4, NULL, 5, NULL); // TCP连接任务
+    xTaskCreate(&TcpSendTask_Entry, "Send", 1024 * 2, NULL, 3, NULL);//TCP消息发送线程
+    xTaskCreate(&TcpCreateTask_Entry, "Tcp Create", 1024 * 4, NULL, 5, NULL); // TCP连接任务
 }

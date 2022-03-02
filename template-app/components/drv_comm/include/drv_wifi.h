@@ -15,6 +15,7 @@
 extern int MAX_Reconnect;
 extern EventGroupHandle_t s_wifi_event_group; // WIFI事件组
 
-void Wifi_Init();
+void Wifi_Init();       //动态分配IP地址
+void Wifi_InitStatic(); //静态分配IP地址
 
 #endif
