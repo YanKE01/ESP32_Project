@@ -93,7 +93,7 @@ int ShowSocketErr(const char *str, int socket)
  *
  * @param pvParameters
  */
-void TcpCreateTask_Entry(void *pvParameters)
+void TcpClientCreateTask_Entry(void *pvParameters)
 {
     int socket_result = 0;
     while (1)
@@ -104,7 +104,7 @@ void TcpCreateTask_Entry(void *pvParameters)
         socket_result = CreateTcpClient();
         if (socket_result == ESP_FAIL)
         {
-            ESP_LOGI(TCP_TAG, "socket create Failed");
+            ESP_LOGI(TCP_TAG, "client socket create Failed");
             continue; //创建失败后继续创建
         }
 
@@ -119,12 +119,12 @@ void TcpCreateTask_Entry(void *pvParameters)
                 socket_result = CreateTcpClient(); //重新创建TCP
                 if (socket_result == ESP_FAIL)
                 {
-                    ESP_LOGI(TCP_TAG, "restart socket create Failed");
+                    ESP_LOGI(TCP_TAG, "restart socket client create Failed");
                     continue; //继续创建
                 }
                 else
                 {
-                    ESP_LOGI(TCP_TAG, "restart socket create Success");
+                    ESP_LOGI(TCP_TAG, "restart socket client create Success");
                     tcpRestart = false; //取消重启标志
                 }
             }

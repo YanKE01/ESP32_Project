@@ -60,7 +60,7 @@ void TcpSendTask_Entry(void *pvParameters)
                                    pdFALSE,
                                    pdFALSE,
                                    1);
-        
+
         if ((bits & WIFI_CONNECTED_BIT) && tcpRestart == false)
         {
             //只有在WIFI连接状态下，且Tcp无需重启状态下
@@ -77,12 +77,16 @@ void TcpSendTask_Entry(void *pvParameters)
 
 /**
  * @brief SHT20采集线程
- * 
- * @param pvParameters 
+ *
+ * @param pvParameters
  */
 void Sht20RequireTask_Entry(void *pvParameters)
 {
-    
+
+    while(1)
+    {
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
 }
 
 /**
@@ -94,7 +98,10 @@ void Task_Startup()
     testSem = xSemaphoreCreateBinary(); //创建二值信号量
 
     xTaskCreate(&LedTask_Entry, "LED", 1024 * 2, NULL, 1, NULL);
-    xTaskCreate(&SemTest_Entry, "SEM", 1024 * 2, NULL, 2, NULL);
-    xTaskCreate(&TcpSendTask_Entry, "Send", 1024 * 2, NULL, 3, NULL);//TCP消息发送线程
-    xTaskCreate(&TcpCreateTask_Entry, "Tcp Create", 1024 * 4, NULL, 5, NULL); // TCP连接任务
+    // xTaskCreate(&SemTest_Entry, "SEM", 1024 * 2, NULL, 2, NULL);
+    // xTaskCreate(&TcpSendTask_Entry, "Send", 1024 * 2, NULL, 3, NULL);//TCP消息发送线程
+    // xTaskCreate(&TcpClientCreateTask_Entry, "Tcp Create", 1024 * 4, NULL, 5, NULL); // TCP连接任务
+
+    // xTaskCreate(&TcpServerCreateTask_Entry,"Tcp Server",1024*4,NULL,5,NULL);
+    xTaskCreate(&TcpServerAcceptTask_Entry, "Tcp Accept", 1024 * 4, NULL, 5, NULL);
 }

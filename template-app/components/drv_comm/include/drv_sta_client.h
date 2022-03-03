@@ -2,7 +2,7 @@
 #define _DRV_STA_CLIENT_H
 
 #define TCP_PORT 6000                      // 电脑端的服务器监听端口
-#define TCP_SERVER_ADRESS "192.168.10.107" // 作为client，要连接TCP服务器地址
+#define TCP_SERVER_ADRESS "192.168.10.113" // 作为client，要连接TCP服务器地址
 
 #include "esp_err.h"
 #include <sys/socket.h>
@@ -15,7 +15,9 @@
 
 extern bool tcpRestart;
 
-void TcpCreateTask_Entry(void *pvParameters);
+void TcpClientCreateTask_Entry(void *pvParameters);
 void TcpSendMessage(char *message);
+int GetSocketErrCode(int socket);
+int ShowSocketErr(const char *str, int socket);
 
 #endif

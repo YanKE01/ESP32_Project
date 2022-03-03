@@ -85,7 +85,11 @@
     "thread": "cpp",
     "typeinfo": "cpp",
     "stdio.h": "c",
-    "tools.h": "c"
+    "tools.h": "c",
+    "drv_sta_server.h": "c",
+    "socket.h": "c",
+    "drv_adc.h": "c",
+    "esp_adc_cal.h": "c"
   },
   "RTT_Studio.Build.Parallel_Jobs": "12",
   "idf.adapterTargetName": "esp32s2",

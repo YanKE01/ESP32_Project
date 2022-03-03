@@ -26,11 +26,9 @@
 #include "drv_gpio.h"
 #include "drv_task.h"
 #include "tools.h"
+
 /*------SYSTEM TAG-----*/
 char *TAG = "TAG";
-
-/*------USER CODE-----*/
-void LedFlashTask(void *pvParameters);
 
 void app_main(void)
 {
@@ -44,7 +42,16 @@ void app_main(void)
    ESP_ERROR_CHECK(ret);
 
    /*-----------------------------用户代码起始-------------------------------------*/
-   // GpioInit(GPIO_NUM_12,GPIO_MODE_OUTPUT);
+   GpioInit(GPIO_NUM_12, GPIO_MODE_OUTPUT);
+   Task_Startup();
+
+   // while (1)
+   // {
+   //    gpio_set_level(GPIO_NUM_12, 0);
+   //    vTaskDelay(1000 / portTICK_PERIOD_MS);
+   //    gpio_set_level(GPIO_NUM_12, 1);
+   //    vTaskDelay(1000 / portTICK_PERIOD_MS);
+   // }
    // Wifi_Init();
    // Task_Startup();
    // Sht20_Init(I2C_NUM_0,GPIO_NUM_16,GPIO_NUM_17);
@@ -56,6 +63,14 @@ void app_main(void)
    // }
 
    Wifi_InitStatic();
-
+   ret = TcpServerCreateTest();
+   if (ret == ESP_OK)
+   {
+      ESP_LOGI(TAG, "tcp socket test create success");
+      Task_Startup();
+   }
+   else
+   {
+      ESP_LOGI(TAG, "tcp socket test create failed");
+   }
 }
-
